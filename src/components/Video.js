@@ -20,6 +20,7 @@ const VideoContainer = styled.div`
     border-radius: 5px;
     background: #cfcfb4;
     margin: 7px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
     padding: 10px;
     img {
         width: 100%;

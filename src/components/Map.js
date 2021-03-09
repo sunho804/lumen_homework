@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
 import Geocode from 'react-geocode';
-import { Dialog, DialogContent, DialogContentText, DialogTitle, Select, MenuItem } from '@material-ui/core';
 
 const containerStyle = {
     width: '100%',
@@ -25,7 +24,7 @@ function Map(props) {
     const [position, setPosition] = useState();
     const [address, setAddress] = useState('');
     const [showInfoWindow, setShowInfoWindow] = useState(false);
-    const [city, setCity] = useState('');
+    // const [city, setCity] = useState('');
     const [landmarks, setLandmarks] = useState([]);
     const [open, setOpen] = useState(false);
     const [selectedLocation, setSelectedLocation] = useState('');
@@ -59,9 +58,10 @@ function Map(props) {
                     setAddress(response.results[0].formatted_address);
                     for(let i = 0; i < response.results[0].address_components.length; i++) {
                         if(response.results[0].address_components[i].types.includes('locality')) {
-                            setCity(response.results[0].address_components[i].long_name);
+                            // setCity(response.results[0].address_components[i].long_name);
+                            props.onLocationChange(response.results[0].address_components[i].long_name);
                         }
-                        setInfoText("The selected address is " + response.results[0].formatted_address);
+                        setInfoText("You are at " + response.results[0].formatted_address);
                     }
                 },
                 (error) => {console.log(error)}
@@ -85,7 +85,7 @@ function Map(props) {
                 console.log(response.results[0].address_components);
                 for(let i = 0; i < response.results[0].address_components.length; i++) {
                     if(response.results[0].address_components[i].types.includes('locality')) {
-                        setCity(response.results[0].address_components[i].long_name);
+                        // setCity(response.results[0].address_components[i].long_name);
                     }
                     setInfoText("The selected address is " + response.results[0].formatted_address);
                 }
@@ -186,7 +186,7 @@ const Text = styled.div`
     font-weight: 900;
     font-size: 18px;
     margin-bottom: 10px;
-    font-family: 'Abel', san-serif;
+    font-family: 'Oswald', sans-serif;
 `;
 const Landmark = styled.button`
     height: 40px;
@@ -198,6 +198,7 @@ const Landmark = styled.button`
     display: block;
     border: none;
     background-color: #E0E0CE;
+    border-bottom: 1px solid #c7c7a8;
 
     :hover {
         background-color: #c7c7a8;

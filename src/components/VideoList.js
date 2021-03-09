@@ -28,7 +28,7 @@ function VideoList(props) {
 
     return (
         <Container>
-            <ListTitle>Related Videos</ListTitle>
+            <ListTitle>Related Videos - {props.selectedLocation}</ListTitle>
             <Videos>
             {
                 videos.length > 0 &&
